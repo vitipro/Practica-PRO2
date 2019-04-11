@@ -11,21 +11,36 @@ private:
   
 public:
 
-  //constructores
+  // constructores
   
-  Node();                     //generica
-  /* 
-  Node(string c, int f);      //concreta
+  Node();                     // generica
+  /* Pre: cert */
+  /* Post: el resultat es un Node sense caracter i sense freq */
   
-  //modificadores
+  Node(string c, int f);      // concreta
+  /* Pre: cert */
+  /* Post: el resultat es un Node amb caracter = c i freq = f */
+  
+  // modificadores
+  
   void modif_node(BinTree<Node> T, Node n);
   
-  //consultores
+  // consultores
+  
   string consultar_caracter();
+  /* Pre: cert */
+  /* Post: el resultat es l'atribut caracter del parametre implicit */
+  
   int consultar_freq();
+  /* Pre: cert */
+  /* Post: el resultat es l'atribut freq del parametre implicit */
   
   //entrada/sortida
+  
   void llegir();
+  /* Pre:  */
+  /* Post: el resultat es l'atribut freq del parametre implicit */
+  
   void escriure();
   
   ~Node();

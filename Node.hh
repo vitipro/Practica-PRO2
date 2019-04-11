@@ -6,13 +6,15 @@ class Node {
 
 private:
   
-  string caracter;
-  int freq;
+  string caracter;        
+  int freq;               
   
 public:
 
   //constructores
+  
   Node();                     //generica
+  /* 
   Node(string c, int f);      //concreta
   
   //modificadores

@@ -38,10 +38,12 @@ public:
   //entrada/sortida
   
   void llegir();
-  /* Pre:  */
-  /* Post: el resultat es l'atribut freq del parametre implicit */
+  /* Pre: a la entrada es troba un string i un enter */
+  /* Post: l'string passa a ser l'atribut caracter i l'enter l'atribut freq del parametre implicit */
   
   void escriure();
+  /* Pre: cert */
+  /* Post: s'escriuen l'atribut caracter i l'atribut freq del parametre implicit */
   
   ~Node();
 

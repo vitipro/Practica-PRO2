@@ -18,11 +18,14 @@ public:
   
   void afegir_idioma(const Idioma& I);
   
-  void modificar_idioma(const Idioma& I)
+  void modificar_idioma(const Idioma& I);
   
   void modificar_idioma_iessim(const Idioma& I, int i);
   
+  // consultores
+  
   bool existeix_idioma(Idioma I) const;
   
-  
   ~Cjt_idiomes();
+  
+}

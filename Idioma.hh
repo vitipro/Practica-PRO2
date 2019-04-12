@@ -24,7 +24,7 @@ public:
   /* Pre: cert */
   /* Post: el resultat es un idioma amb identificador nom i taula taula_freq */
   
-  BinTree crear_treecode(BinTree<Node>& T, vector<Node> taula_freq);      // BinTree o void ¿?  -MIRAR-
+  void crear_treecode(BinTree<Node>& T, vector<Node> taula_freq);      // BinTree o void ¿?  -MIRAR-
   /* Pre: T es un BinTree buit */
   /* Post: el resultat es un BinTree amb nodes amb els elements de taula_freq */
   

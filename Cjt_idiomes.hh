@@ -1,12 +1,11 @@
 #include "Idioma.hh"
-#include <vector>
+#include <map>
 
 class Cjt_idiomes {
 
 private:
 
-  vector<Idioma> v_idiom;
-  int n_idiom;
+  map<string, Idioma> c;      // clau string es el nom de l'Idioma
 
 public:
 
@@ -14,17 +13,17 @@ public:
   
   Cjt_idiomes();           // generica
   
+  // consultores
+  
+  bool existeix_idioma(Idioma I) const;
+  
   // modificadores
   
   void afegir_idioma(const Idioma& I);
   
   void modificar_idioma(const Idioma& I);
   
-  void modificar_idioma_iessim(const Idioma& I, int i);
-  
-  // consultores
-  
-  bool existeix_idioma(Idioma I) const;
+  void modificar_idioma_iessim(const Idioma& I);
   
   ~Cjt_idiomes();
   

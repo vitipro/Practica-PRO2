@@ -23,7 +23,7 @@ public:
   
   // modificadores
   
-  void modif_node(BinTree<Node> T, Node n);      // ¿?
+  void modif_node(BinTree<Node>& T, Node n);      // ¿?
   
   // consultores
   

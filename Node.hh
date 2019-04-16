@@ -1,5 +1,4 @@
 #include <iostream>
-#include <BinTree>
 using namespace std;
 
 class Node {

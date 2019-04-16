@@ -35,7 +35,7 @@ public:
   /* Pre: cert */
   /* Post: el resultat es l'atribut freq del parametre implicit */
   
-  //entrada/sortida
+  // entrada/sortida
   
   void llegir();
   /* Pre: a la entrada es troba un string i un enter */

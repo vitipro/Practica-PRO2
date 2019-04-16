@@ -1,11 +1,12 @@
-#include "Idioma.hh"
 #include "Cjt_idiomes.hh"
 using namespace std;
 
 int main() {
-  declaracions d'Idioma i n
-  bucle per llegir idiomes (guardar en classe Cjt_idiomes)
-  declaracio d'opcio
-  while opcio != acabar
-  realitzacio d'opcio
+  Cjt_idiomes c;                                          
+  c.llegir_conjunt();                                        // dentro tendra int n i Idioma I
+  string opcio;
+  while (opcio != acabar) {
+    if (opcio == "")  ...
+    realitzacio d'opcio
+  }
 }

@@ -25,6 +25,10 @@ public:
   
   void modificar_idioma_iessim(const Idioma& I);
   
+  // entrada/sortida
+  
+  void llegir_conjunt();
+  
   ~Cjt_idiomes();
   
 }

@@ -1,6 +1,4 @@
 #include "Node.hh"
-#include <BinTree>
-#include <vector>
 #include <map>
 
 class Idioma {

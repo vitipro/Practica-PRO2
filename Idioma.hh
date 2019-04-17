@@ -18,29 +18,29 @@ public:
   /* Pre: cert */
   /* Post: el resultat es un Idioma sense nom ni taula_freq */
   
-  Idioma(string nom, vector<Node> taula_freq); 
+  Idioma(string nom); 
   /* Pre: cert */
-  /* Post: el resultat es un idioma amb identificador nom i taula taula_freq */
-  
-  void crear_treecode(BinTree<Node>& T, vector<Node> taula_freq);      // BinTree o void ¿?  -MIRAR-
-  /* Pre: T es un BinTree buit */
-  /* Post: el resultat es un BinTree amb nodes amb els elements de taula_freq */
+  /* Post: el resultat es un idioma amb identificador nom i sense taula_freq */
   
   // modificadores
   
-  void actualitzar_treecode(BinTree<Node>& T, vector<Node> taula_freq);
-  /* Pre: T es un BinTree no buit */
-  /* Post: T actualitza el seus nodes amb el vector<Node> taula_freq */
+  void modificar_taula(vector<Node> taula);
+  /* Pre: cert */
+  /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
   
   // consultores
   
-  vector<Node> consultar_taula_freq();
+  void consultar_taula_freq();
   /* Pre: cert */
   /* Post: el resultat es la taula_freq del parametre implicit */
   
   void consultar_codi();
   /* Pre: cert */
   /* Post: el resultat es el conjunt de codis de Idioma */
+  
+  void consultar_codi_especific(string caracter);
+  /* Pre: cert */
+  /* Post: el resultat es el codi de string concret */
   
   // entrada/sortida
   

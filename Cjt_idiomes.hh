@@ -15,9 +15,13 @@ public:
   
   // consultores
   
-  bool existeix_idioma(Idioma I) const;
+  bool existeix_idioma(string id) const;
   /* Pre: cert */
-  /* Post: retorna true si Idioma hi es al conjunt */
+  /* Post: retorna true si id = nom de Idioma, per tant, hi es al conjunt */
+  
+  Idioma consultar_idioma(string id) const;
+  /* Pre: id = nom de Idioma existent al conjunt */
+  /* Post: el resultat és el Idioma consultat */
   
   // modificadores
   

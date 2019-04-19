@@ -29,10 +29,14 @@ public:
     /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
   
     // consultores
+    
+    void consultar_nom();
+    /* Pre: cert */
+    /* Post: el resultat es el nom del parametre implícit */
   
     void consultar_taula_freq();
     /* Pre: cert */
-    /* Post: el resultat es la taula_freq del parametre implicit */
+    /* Post: el resultat es la taula_freq del parametre implícit */
   
     void consultar_codi();
     /* Pre: cert */
@@ -46,11 +50,11 @@ public:
   
     void llegir_idioma();
     /* Pre: a la entrada es troba un string nom d'Idioma i un seguit de Nodes (vector) */
-    /* Post: el parametre implicit passa a tenir nom = nom i taula_freq = vector<Nodes> */
+    /* Post: el parametre implícit passa a tenir nom = nom i taula_freq = vector<Nodes> */
   
     void escriure_idioma();
     /* Pre: cert */
-    /* Post: s'escriuen els atributs del parametre implicit */
+    /* Post: s'escriuen els atributs del parametre implícit */
   
     ~Idioma();
 }

@@ -29,7 +29,7 @@ public:
     /* Pre: T és un BinTree no buit */
     /* Post: T actualitza el seus Nodes */
     
-    void modificar_taula(vector<Node> taula);
+    void modificar_taula(vector<Node>& taula);
     /* Pre: cert */
     /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
   
@@ -62,5 +62,6 @@ public:
     /* Post: s'escriu al canal de sortida estàndard els recorreguts en pre i inordre de T */
   
     ~Idioma();
+    
 }
   

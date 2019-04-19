@@ -5,40 +5,40 @@ class Cjt_idiomes {
 
 private:
 
-  map<string, Idioma> c;      // clau string es el nom de l'Idioma
+    map<string, Idioma> c;      // clau string es el nom de l'Idioma
 
 public:
 
-  // constructores
+    // constructores
   
-  Cjt_idiomes();          
+    Cjt_idiomes();          
   
-  // consultores
+    // consultores
   
-  bool existeix_idioma(string id) const;
-  /* Pre: cert */
-  /* Post: retorna true si id = nom de Idioma, per tant, hi es al conjunt */
+    bool existeix_idioma(string id) const;
+    /* Pre: cert */
+    /* Post: retorna true si id = nom de Idioma, per tant, hi es al conjunt */
   
-  Idioma consultar_idioma(string id) const;
-  /* Pre: id = nom de Idioma existent al conjunt */
-  /* Post: el resultat és el Idioma consultat */
+    Idioma consultar_idioma(string id) const;
+    /* Pre: id = nom de Idioma existent al conjunt */
+    /* Post: el resultat és el Idioma consultat */
   
-  // modificadores
+    // modificadores
   
-  void afegir_idioma(const Idioma& I);
-  /* Pre: Idioma no hi és al conjunt */
-  /* Post: el conjunt conté a Idioma */
+    void afegir_idioma(const Idioma& I);
+    /* Pre: Idioma no hi és al conjunt */
+    /* Post: el conjunt conté a Idioma */
   
-  void modificar_idioma(const Idioma& I);
-  /* Pre: Idioma hi és al conjunt */
-  /* Post: Idioma ha estat modificat */
+    void modificar_idioma(const Idioma& I);
+    /* Pre: Idioma hi és al conjunt */
+    /* Post: Idioma ha estat modificat */
   
-  // entrada/sortida
+    // entrada/sortida
   
-  void llegir_conjunt();
-  /* Pre: al canal estàndard d'entrada hi ha una sèrie de idiomes */
-  /* Post: els idiomes s'han afegit al conjunt */
+    void llegir_conjunt();
+    /* Pre: al canal estàndard d'entrada hi ha una sèrie de idiomes */
+    /* Post: els idiomes s'han afegit al conjunt */
   
-  ~Cjt_idiomes();
-  
+    ~Cjt_idiomes();
+    
 }

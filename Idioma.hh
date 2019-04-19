@@ -29,16 +29,12 @@ public:
     /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
   
     // consultores
-    
-    void consultar_nom();
-    /* Pre: cert */
-    /* Post: el resultat es el nom del parametre implícit */
   
     void consultar_taula_freq();
     /* Pre: cert */
     /* Post: el resultat es la taula_freq del parametre implícit */
   
-    void consultar_codi();
+    void consultar_codis();
     /* Pre: cert */
     /* Post: el resultat es el conjunt de codis de Idioma */
   

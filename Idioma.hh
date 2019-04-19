@@ -1,4 +1,5 @@
 #include "Node.hh"
+#include "BinTree.hh"
 #include <map>
 
 class Idioma {
@@ -24,6 +25,10 @@ public:
   
     // modificadores
   
+    void actualitzar_treecode(BinTree<Node>& T);
+    /* Pre: T és un BinTree no buit */
+    /* Post: T actualitza el seus Nodes */
+    
     void modificar_taula(vector<Node> taula);
     /* Pre: cert */
     /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
@@ -44,13 +49,17 @@ public:
   
     // entrada/sortida
   
+    void llegir_crear_treecode(BinTree<Node>& T);
+    /* Pre: es llegeix una taula de frequencies */
+    /* Post: T és un arbre que conté els Nodes corresponents */
+    
     void llegir_idioma();
     /* Pre: a la entrada es troba un string nom d'Idioma i un seguit de Nodes (vector) */
     /* Post: el parametre implícit passa a tenir nom = nom i taula_freq = vector<Nodes> */
   
-    void escriure_idioma();
+    void escriure_treecode(BinTree<Node>& T);        
     /* Pre: cert */
-    /* Post: s'escriuen els atributs del parametre implícit */
+    /* Post: s'escriu al canal de sortida estàndard els recorreguts en pre i inordre de T */
   
     ~Idioma();
 }

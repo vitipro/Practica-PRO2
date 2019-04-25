@@ -35,7 +35,7 @@ public:
   
     // entrada/sortida
   
-    void leer_conjunt();
+    void leer_conjunto();
     /* Pre: al canal estàndard d'entrada hi ha una sèrie de idiomes */
     /* Post: els idiomes s'han afegit al conjunt */
     

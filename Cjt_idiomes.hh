@@ -1,7 +1,7 @@
 #include "Idioma.hh"
 #include <map>
 
-class Cjt_idiomes {
+class Cjto_idiomas {
 
 private:
 
@@ -11,11 +11,11 @@ public:
 
     // constructores
   
-    Cjt_idiomes();          
+    Cjto_idiomas();          
   
     // consultores
   
-    bool existeix_idioma(string id) const;
+    bool existe_idioma(string id) const;
     /* Pre: cert */
     /* Post: retorna true si id = nom de Idioma, per tant, hi es al conjunt */
   
@@ -25,7 +25,7 @@ public:
   
     // modificadores
   
-    void afegir_idioma(const Idioma& I);
+    void anadir_idioma(const Idioma& I);
     /* Pre: Idioma no hi és al conjunt */
     /* Post: el conjunt conté a Idioma */
   
@@ -35,9 +35,13 @@ public:
   
     // entrada/sortida
   
-    void llegir_conjunt();
+    void leer_conjunt();
     /* Pre: al canal estàndard d'entrada hi ha una sèrie de idiomes */
     /* Post: els idiomes s'han afegit al conjunt */
+    
+    void codifica_idioma(string id, string& texto);
+    
+    void decodifica_idioma(string id, string& texto);
   
     ~Cjt_idiomes();
     

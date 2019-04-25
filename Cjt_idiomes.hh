@@ -43,6 +43,6 @@ public:
     
     void decodifica_idioma(string id, string& texto);
   
-    ~Cjt_idiomes();
+    ~Cjto_idiomas();
     
 }

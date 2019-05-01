@@ -1,0 +1,31 @@
+#include "Nodo.hh"
+#include <iostream>
+using namespace std;
+
+Nodo::Nodo() {
+    caracter = "";
+    frec = 0;
+}
+
+Nodo::~Nodo() {}
+
+Nodo::Nodo(string c, int f) {
+    caracter = c;
+    frec = f;
+}
+
+string Nodo::consultar_caracter() const {
+    return caracter;
+}
+
+int Nodo::consultar_frec() const {
+    return frec;
+}
+
+void Nodo::leer() {
+    cin >> caracter >> frec;
+}
+
+void Nodo::escribir() const {
+    cout << caracter << " " << frec << endl;
+}

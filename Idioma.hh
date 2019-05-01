@@ -1,67 +1,113 @@
-#include "Node.hh"
-#include "BinTree.hh"
+/** @file Idioma.hh
+    @brief Especificación de la clase Idioma
+*/
+
+#ifndef _IDIOMA_HH_
+#define _IDIOMA_HH_
+
+#include "Nodo.hh"           
+#include "Treecode.hh"
+
+#ifndef NO_DIAGRAM
+#include <vector>
 #include <map>
+#include <algorithm>
+#endif
+
+/** @class Idioma
+    @brief Representa un idioma 
+    
+    Cada idioma contiene unos códigos para cada uno de sus caracteres, usando una tabla de frecuencias. Con estos códigos se quiere codificar y decodificar textos escritos
+*/
 
 class Idioma {
 
 private:
 
-    string nom;                                 // identificador
-    vector<Node> taula_freq;                    // taula de frequencies
-    BinTree treecode;
-    map<string caracter, string codi>           // diccionari per consultar codis
+    string nombre;                              // identificador
+    vector<Nodo> tabla_frec;                    // tabla de frecuencias
+    Treecode treecode;                          // treecode del idioma
+    map<string, string> d;                      // diccionario para consultar códigos, key: caracter a consultar, mapped value: código
   
 public:
 
-    // constructores
+    // constructoras
   
-    Idioma();             // generica
-    /* Pre: cert */
-    /* Post: el resultat es un Idioma sense nom ni taula_freq */
+    /** @brief Creadora por defecto de un idioma
+     
+        Cuando se declara se ejecuta automáticamente
+        \pre <em>cierto</em> 
+        \post el resultado es un Idioma sin nombre ni tabla_frec
+    */
+    Idioma();             
   
-    Idioma(string nom); 
-    /* Pre: cert */
-    /* Post: el resultat es un idioma amb identificador nom i sense taula_freq */
-  
-    // modificadores
-  
-    void actualitzar_treecode(BinTree<Node>& T);
-    /* Pre: T és un BinTree no buit */
-    /* Post: T actualitza el seus Nodes */
+ //   /** @brief Creadora de un idioma con nombre
+ //       \pre <em>cierto</em> 
+ //       \post el resultado es un idioma con nombre = id 
+ //   */
+ //   Idioma(string id); 
+
+    // modificadoras
     
-    void modificar_taula(vector<Node>& taula);
-    /* Pre: cert */
-    /* Post: s'afegeixen a taula_freq del parametre implicit les frequencies de la nova taula */
+    /** @brief Modifica la tabla de frecuencias de un idioma
+        \pre <em>cierto</em> 
+        \post se añaden a tabla_frec del parámetro implícito las frecuencias de la nueva tabla
+    */
+    void modificar_tabla(vector<Nodo>& tabla);
+	
+	/** @brief Asigna los códigos de caracter a un idioma
+        \pre <em>cierto</em> 
+        \post se añaden a d del parámetro implícito los códigos de sus caracteres
+    */
+	void asignar_codigos();
+	
+    // consultoras
+	
+	/** @brief Consulta el nombre de un idioma
+        \pre <em>cierto</em> 
+        \post el resultado es el nombre del parámetro implícito
+    */
+    string consultar_nombre();
   
-    // consultores
+    /** @brief Consulta la tabla de frecuencias de un idioma
+        \pre <em>cierto</em> 
+        \post el resultado es la tabla_frec del parámetro implícito
+    */
+    vector<Nodo> consultar_tabla_frec();
   
-    void consultar_taula_freq();
-    /* Pre: cert */
-    /* Post: el resultat es la taula_freq del parametre implícit */
+    /** @brief Consulta los códigos de un idioma
+        \pre <em>cierto</em> 
+        \post el resultado es el conjunto de códigos del parámetro implícito
+    */
+    void consultar_codigos();
   
-    void consultar_codis();
-    /* Pre: cert */
-    /* Post: el resultat es el conjunt de codis de Idioma */
+    /** @brief Consulta el código de un caracter de un idioma
+        \pre el caracter c puede no estar en el diccionario d del parámetro implícito 
+        \post el resultado es el código del caracter concreto si este existe, si no, se avisará 
+    */
+    void consultar_codigo_especifico(string c);
+	
+	/** @brief Consulta el treecode de un idioma
+        \pre <em>cierto</em> 
+        \post el resultado es el treecode del paràmetro implícito
+    */
+	void consultar_treecode();
   
-    void consultar_codi_especific(string caracter);
-    /* Pre: cert */
-    /* Post: el resultat es el codi de string concret */
-  
-    // entrada/sortida
-  
-    void llegir_crear_treecode(BinTree<Node>& T);
-    /* Pre: es llegeix una taula de frequencies */
-    /* Post: T és un arbre que conté els Nodes corresponents */
+    // entrada/salida
+	
+	/** @brief Operación de escritura de tabla_frec
+        \pre <em>cierto</em>
+        \post se escribe en el canal de salida estándard tabla_frec
+    */
+	void escribir_tabla_frec();
     
-    void llegir_idioma();
-    /* Pre: a la entrada es troba un string nom d'Idioma i un seguit de Nodes (vector) */
-    /* Post: el parametre implícit passa a tenir nom = nom i taula_freq = vector<Nodes> */
-  
-    void escriure_treecode(BinTree<Node>& T);        
-    /* Pre: cert */
-    /* Post: s'escriu al canal de sortida estàndard els recorreguts en pre i inordre de T */
+    /** @brief Operación de lectura de un idioma
+        \pre en la entrada se encuentra un string y una seguido de Nodos (vector)
+        \post el parámetro implícito pasa a tener nombre y tabla_frec 
+    */
+    void leer_idioma();
   
     ~Idioma();
     
-}
-  
+};
+#endif

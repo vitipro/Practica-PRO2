@@ -1,50 +1,80 @@
+/** @file Nodo.hh
+    @brief Especificación de la clase Nodo
+*/
+
+#ifndef _NODO_HH_
+#define _NODO_HH_
+
+#ifndef NO_DIAGRAM
 #include <iostream>
 using namespace std;
+#endif
 
-class Node {
+/** @class Nodo
+    @brief Representa un nodo del treecode de un idioma, con 2 atributos, un caracter y una frecuencia 
+*/
+
+class Nodo {
 
 private:
   
-  string caracter;        
-  int freq;               
+    string caracter;        
+    int frec;        
+	
   
 public:
 
-  // constructores
+    // constructoras
   
-  Node();                     // generica
-  /* Pre: cert */
-  /* Post: el resultat es un Node sense caracter i sense freq */
-  
-  Node(string c, int f);      // concreta
-  /* Pre: cert */
-  /* Post: el resultat es un Node amb caracter = c i freq = f */
-  
-  // modificadores
-  
-  void modif_node();      // ¿?
-  
-  // consultores
-  
-  string consultar_caracter();
-  /* Pre: cert */
-  /* Post: el resultat es l'atribut caracter del parametre implicit */
-  
-  int consultar_freq();
-  /* Pre: cert */
-  /* Post: el resultat es l'atribut freq del parametre implicit */
-  
-  // entrada/sortida
-  
-  void llegir();
-  /* Pre: a la entrada es troba un string i un enter */
-  /* Post: l'string passa a ser l'atribut caracter i l'enter l'atribut freq del parametre implicit */
-  
-  void escriure();               
-  /* Pre: cert */
-  /* Post: s'escriuen l'atribut caracter i l'atribut freq del parametre implicit */
-  
-  ~Node();
+    /** @brief Creadora por defecto de un nodo
 
-}
+        Cuando se declara se ejecuta automáticamente
+        \pre <em>cierto</em> 
+        \post el resultado es un Nodo sin caracter ni frec
+    */
+    Nodo();                     
   
+    /** @brief Creadora de un nodo con caracter y frecuencia
+        \pre <em>cierto</em> 
+        \post el resultado es un Nodo con caracter = c i frec = f
+    */
+    Nodo(string c, int f);      
+  
+    // modificadoras
+  
+    //     void modif_nodo();      // ¿?
+  
+    // consultoras
+    
+    /** @brief Consultora del caracter de un nodo
+        \pre <em>cierto</em> 
+        \post el resultado es el atributo caracter del parámetro implícito
+    */
+    string consultar_caracter() const;
+    
+    /** @brief Consultora de la frecuencia de un nodo 
+        \pre <em>cierto</em> 
+        \post el resultado es el atributo frec del parámetro implícito
+    */
+    int consultar_frec() const;
+  
+    // entrada/salida
+    
+    /** @brief Operación de lectura de un nodo 
+        \pre en la entrada se encuentra un string y un entero
+        \post el string pasa a ser el atributo caracter y el entero el atributo frec del parámetro implícito
+    */
+    void leer();
+  
+    /** @brief Operación de escritura de un nodo
+        \pre <em>cierto</em>  
+        \post se escriben los atributos caracter y frec del parámetro implícito
+    */
+    void escribir() const;               
+  
+    ~Nodo();
+
+};
+#endif
+  
+

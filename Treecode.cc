@@ -10,6 +10,16 @@ Treecode::Treecode() {}
 
 Treecode::~Treecode() {}
 
+Nodo suma_nodos(const Nodo& n1, const Nodo& n2) {
+    string c;
+    if (n1.consultar_caracter() < n2.consultar_caracter()) c = n1.consultar_caracter() + n2.consultar_caracter();
+    else c = n2.consultar_caracter() + n1.consultar_caracter();
+    int f = n1.consultar_frec() + n2.consultar_frec();
+    Nodo suma(c, f);
+    return suma;
+}
+    
+
 bool operator<(const Nodo& n1, const Nodo& n2) {
 	if (n1.consultar_frec() == n2.consultar_frec()) return (n1.consultar_caracter()) < (n2.consultar_caracter());
 	else return (n1.consultar_frec()) < (n2.consultar_frec());
@@ -23,7 +33,7 @@ bool operator==(const Nodo& n1, const Nodo& n2) {
 void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {
 	bool insertado = false;
 	list<BinTree<Nodo>>::iterator it = l.begin();
-	while (it != l.end() or not insertado) {
+	while (not insertado) {
 		if (it == l.end()) {
 			l.insert(l.end(), T);
 			insertado = true;
@@ -59,25 +69,30 @@ void Treecode::crear_treecode(vector<Nodo> tabla) {
 	while (subarboles.size() > 1) {
 		cout << "Bucle inicio" << endl;
 		list<BinTree<Nodo>>::iterator it = subarboles.begin();
-		string suma_c = (*it).value().consultar_caracter();
-		int suma_f = (*it).value().consultar_frec();
+		string suma_c1 = (*it).value().consultar_caracter();
+		int suma_f1 = (*it).value().consultar_frec();
 		BinTree<Nodo> left = *it;
 		it = subarboles.erase(it);
-		suma_c += (*it).value().consultar_caracter();
-		suma_f += (*it).value().consultar_frec();
-		sort(suma_c.begin(), suma_c.end());
-		Nodo suma(suma_c, suma_f);
+        string suma_c2 = (*it).value().consultar_caracter();
+        int suma_f2 = (*it).value().consultar_frec();
+        Nodo n1(suma_c1, suma_f1);  
+        Nodo n2(suma_c2, suma_f2); 
+        Nodo suma = suma_nodos(n1, n2);
 		suma.escribir();
 		BinTree<Nodo> right = *it;
 		it = subarboles.erase(it);
-		cout << "Harbol hacido" << endl;
+		cout << "Arbol hecho" << endl;
 		BinTree<Nodo> a(suma, left, right);
-		cout << "Insercionamos" << endl;
+		cout << "Insertamos" << endl;
 		anadir_elemento(subarboles, a);
 		arbol = a;
 		cout << "Bucle final" << endl;
+        cout << subarboles.size() << endl;
+        list<BinTree<Nodo>>::iterator it2 = subarboles.begin();
+        for (list<BinTree<Nodo>>::iterator it2 = subarboles.begin(); it2 != subarboles.end(); ++it2) (*it2).value().escribir(); 
 	}
 	subarboles.clear();
+	
 }
 
 void Treecode::escribir_treecode(const BinTree<Nodo>& a) {

@@ -10,7 +10,7 @@ Treecode::Treecode() {}
 
 Treecode::~Treecode() {}
 
-Nodo suma_nodos(const Nodo& n1, const Nodo& n2) {
+Nodo Treecode::suma_nodos(const Nodo& n1, const Nodo& n2) { //privada
     string c;
     if (n1.consultar_caracter() < n2.consultar_caracter()) c = n1.consultar_caracter() + n2.consultar_caracter();
     else c = n2.consultar_caracter() + n1.consultar_caracter();
@@ -18,19 +18,36 @@ Nodo suma_nodos(const Nodo& n1, const Nodo& n2) {
     Nodo suma(c, f);
     return suma;
 }
-    
+ 
+list<Nodo> Treecode::preorden(const BinTree<Nodo>& T) {
+	list<Nodo> L;
+	if (not T.empty()) {
+		L.insert(L.begin(), T.value());
+		L.splice(L.end(), preorden(T.left()));
+		L.splice(L.end(), preorden(T.right()));
+	}
+	return L;
+}
 
-bool operator<(const Nodo& n1, const Nodo& n2) {
+void Treecode::inorden(const BinTree<Nodo>& T) {
+	if (not T.empty()) {
+		inorden(T.left());
+		T.value().escribir();
+		inorden(T.right());
+	}
+}
+
+bool operator<(const Nodo& n1, const Nodo& n2) {  //privada
 	if (n1.consultar_frec() == n2.consultar_frec()) return (n1.consultar_caracter()) < (n2.consultar_caracter());
 	else return (n1.consultar_frec()) < (n2.consultar_frec());
 }
 
-bool operator==(const Nodo& n1, const Nodo& n2) {
+bool operator==(const Nodo& n1, const Nodo& n2) {  //privada
 	if ((n1.consultar_caracter() == n2.consultar_caracter()) and (n1.consultar_frec() == n2.consultar_frec())) return true;
 	else return false;
 }
 
-void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {
+void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {  // privada
 	bool insertado = false;
 	list<BinTree<Nodo>>::iterator it = l.begin();
 	while (not insertado) {
@@ -74,7 +91,6 @@ void Treecode::crear_treecode(vector<Nodo> tabla) {
 		subarboles.insert(subarboles.end(), aux);
 	}
 	while (subarboles.size() > 1) {
-		cout << "Bucle inicio" << endl;
 		list<BinTree<Nodo>>::iterator it = subarboles.begin();
 		string suma_c1 = (*it).value().consultar_caracter();
 		int suma_f1 = (*it).value().consultar_frec();
@@ -85,30 +101,18 @@ void Treecode::crear_treecode(vector<Nodo> tabla) {
         Nodo n1(suma_c1, suma_f1);  
         Nodo n2(suma_c2, suma_f2); 
         Nodo suma = suma_nodos(n1, n2);
-		suma.escribir();
 		BinTree<Nodo> right = *it;
 		it = subarboles.erase(it);
-		cout << "Arbol hecho" << endl;
 		BinTree<Nodo> a(suma, left, right);
-		cout << "Insertamos" << endl;
 		anadir_elemento(subarboles, a);
-		arbol = a;
-		cout << "Bucle final" << endl;
-        cout << subarboles.size() << endl;
-        list<BinTree<Nodo>>::iterator it2 = subarboles.begin();
-        for (list<BinTree<Nodo>>::iterator it2 = subarboles.begin(); it2 != subarboles.end(); ++it2) (*it2).value().escribir(); 
+		arbol = a; 
 	}
-	subarboles.clear();
-	
 }
 
-void Treecode::escribir_treecode(const BinTree<Nodo>& a) {
-	arbol = a;
+void Treecode::escribir_treecode() {
 	cout << "recorrido en preorden:" << endl;
+	list<Nodo> L = preorden(arbol);
+	for (list<Nodo>::const_iterator it = L.begin(); it != L.end(); ++it) (*it).escribir();
 	cout << "recorrido en inorden:" << endl;
-	if (not arbol.empty()) {
-		Treecode::escribir_treecode(arbol.right());
-		arbol.value().escribir();
-		Treecode::escribir_treecode(arbol.left());
-	}
+	inorden(arbol);
 }

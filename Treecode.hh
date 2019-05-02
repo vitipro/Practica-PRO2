@@ -27,7 +27,9 @@ class Treecode {
 private:
 
 	BinTree<Nodo> arbol;
-	
+    
+    // operadores y mierdas son funciones privadas
+    
 public:
 
 	// creadoras

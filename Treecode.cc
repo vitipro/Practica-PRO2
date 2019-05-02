@@ -38,10 +38,17 @@ void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {
 			l.insert(l.end(), T);
 			insertado = true;
 		}
-		else if (T.value().consultar_frec() <= (*it).value().consultar_frec()) {
+		else if (T.value().consultar_frec() < (*it).value().consultar_frec()) {
 			l.insert(it, T);
 			insertado = true;
 		}
+		else if (T.value().consultar_frec() == (*it).value().consultar_frec()) {
+            if (T.value() < (*it).value()) {
+                l.insert(it, T);
+                insertado = true;
+            }
+            else ++it;
+        }
 		else ++it;
 	}
 }

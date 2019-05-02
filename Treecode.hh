@@ -27,8 +27,30 @@ class Treecode {
 private:
 
 	BinTree<Nodo> arbol;
+	
+	/** @brief Suma dos nodos 
+		\pre <em>cierto</em>
+        \post el resultado es un Nodo con caracter = concatenación (en orden lexicográfico) de caracteres de n1 y n2 y frec = frec n1 + frec n2
+    */
+	Nodo suma_nodos(const Nodo& n1, const Nodo& n2);
+	
+	/** @brief Recorre en preorden un árbol 
+		\pre <em>cierto</em>
+        \post retorna una lista con el recorrido en preorden de T
+    */
+	list<Nodo> preorden(const BinTree<Nodo>& T);
+	
+	/** @brief Recorre en inorden un árbol 
+		\pre <em>cierto</em>
+        \post retorna el recorrido en inorden de T
+    */
+	void inorden(const BinTree<Nodo>& T);
     
-    // operadores y mierdas son funciones privadas
+	/** @brief Inserta un Nodo a una lista
+        \pre l está ordenada crecientemente
+        \post n queda insertado en su posición 
+    */
+    void anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T);
     
 public:
 
@@ -36,7 +58,7 @@ public:
 	
 	/** @brief Creadora por defecto de un treecode
         \pre <em>cierto</em> 
-        \post el resultado es un set vacío  
+        \post el resultado es un BinTree vacío  
     */
     Treecode();
 
@@ -47,12 +69,6 @@ public:
 //        \post el treecode T queda actualizado  
 //    */
 //    void actualizar_treecode();  
-
-	/** @brief Inserta un Nodo a una lista
-        \pre l está ordenada crecientemente
-        \post n queda insertado en su posición 
-    */
-    void anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T);
 	
 	// consultoras
 	
@@ -74,9 +90,9 @@ public:
         \pre <em>cierto</em> 
         \post se escribe en el canal de salida estándard los recorridos en pre e inordren de T
     */
-    void escribir_treecode(const BinTree<Nodo>& a);  
+    void escribir_treecode();  
 	
 	~Treecode();
 	
 };
-#endif	
+#endif		

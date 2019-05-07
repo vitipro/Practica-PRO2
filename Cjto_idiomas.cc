@@ -26,9 +26,9 @@ void Cjto_idiomas::anadir_idioma(Idioma& I) {
 	//it->second = I;
 //}
 
-Idioma Cjto_idiomas::consultar_idioma(string id) const {
-    map<string, Idioma>::const_iterator it = c.find(id);
-	return it->second;
+map<string, Idioma>::iterator Cjto_idiomas::consultar_idioma(string id) {
+    map<string, Idioma>::iterator it = c.find(id);
+	return it;
 }
 
 void Cjto_idiomas::leer_conjunto() {

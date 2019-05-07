@@ -40,11 +40,15 @@ int main() {
 			string texto;
 			cin >> id >> texto;
 			c.decodifica_idioma(id, texto);     // decodifica_idioma ya dirá si el idioma existe o si es decodificable
+		}
 		}*/
 		if (opcion == "tabla_frec") {
 			cin >> id;
 			cout << "Tabla de frecuencias de " << id << ":" << endl;
-			if (c.existe_idioma(id)) c.consultar_idioma(id).escribir_tabla_frec();
+			if (c.existe_idioma(id)) {
+				map<string, Idioma>::iterator it = c.consultar_idioma(id);
+				(it->second).escribir_tabla_frec();
+			}
 			else {
 				cout << "El idioma no existe" << endl;
 				cout << endl;
@@ -53,7 +57,10 @@ int main() {
 		if (opcion == "treecode") {
 			cin >> id;
 			cout << "Treecode de " << id << ":" << endl;
-			if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_treecode();
+			if (c.existe_idioma(id)) {
+				map<string, Idioma>::iterator it = c.consultar_idioma(id);
+				(it->second).consultar_treecode();
+			}
 			else cout << "El idioma no existe" << endl;
 			cout << endl;
 		}
@@ -62,7 +69,10 @@ int main() {
 			cin >> id >> s;
 			if (s == "todos") {
 				cout << "Codigos de " << id << ":" << endl;
-				if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_codigos();
+				if (c.existe_idioma(id)) {
+					map<string, Idioma>::iterator it = c.consultar_idioma(id);
+					(it->second).consultar_codigos();
+				}
 				else {
 					cout << "El idioma no existe" << endl;
 					cout << endl;
@@ -70,7 +80,10 @@ int main() {
 			}
 			else {
 				cout << "Codigo de " << s << " en " << id << ":" << endl;
-				if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_codigo_especifico(s);        // si el idioma existe pero el caracter no, consultar_codigo_especifico() avisará 
+				if (c.existe_idioma(id)) {
+					map<string, Idioma>::iterator it = c.consultar_idioma(id);    
+					(it->second).consultar_codigo_especifico(s);                                     // si el idioma existe pero el caracter no, consultar_codigo_especifico() avisará 
+				}
 				else {
 					cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
 					cout << endl;

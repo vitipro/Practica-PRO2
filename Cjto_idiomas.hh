@@ -9,6 +9,7 @@
 
 #ifndef NO_DIAGRAM
 #include <map>
+#include <iterator>
 #endif
 
 /** @class Cjto_idiomas
@@ -61,9 +62,9 @@ public:
  
     /** @brief Consulta un idioma del conjunto
         \pre id = nombre de idioma existente en el conjunto
-        \post el resultado es el idioma consultado
+        \post el resultado es un iterador que apunta al idioma consultado
     */
-    Idioma consultar_idioma(string id) const;
+    map<string, Idioma>::iterator consultar_idioma(string id);
   
     // entrada/salida
   

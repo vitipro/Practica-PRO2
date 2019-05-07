@@ -9,27 +9,16 @@ using namespace std;
 Treecode::Treecode() {}
 
 Treecode::~Treecode() {}
-
-Nodo Treecode::suma_nodos(const Nodo& n1, const Nodo& n2) { //privada
-    string c;
-    if (n1.consultar_caracter() < n2.consultar_caracter()) c = n1.consultar_caracter() + n2.consultar_caracter();
-    else c = n2.consultar_caracter() + n1.consultar_caracter();
-    int f = n1.consultar_frec() + n2.consultar_frec();
-    Nodo suma(c, f);
-    return suma;
-}
  
-list<Nodo> Treecode::preorden(const BinTree<Nodo>& T) {
-	list<Nodo> L;
+void Treecode::preorden(const BinTree<Nodo>& T) const {
 	if (not T.empty()) {
-		L.insert(L.begin(), T.value());
-		L.splice(L.end(), preorden(T.left()));
-		L.splice(L.end(), preorden(T.right()));
+		T.value().escribir();
+		preorden(T.left());
+		preorden(T.right());
 	}
-	return L;
 }
 
-void Treecode::inorden(const BinTree<Nodo>& T) {
+void Treecode::inorden(const BinTree<Nodo>& T) const {
 	if (not T.empty()) {
 		inorden(T.left());
 		T.value().escribir();
@@ -37,17 +26,17 @@ void Treecode::inorden(const BinTree<Nodo>& T) {
 	}
 }
 
-bool operator<(const Nodo& n1, const Nodo& n2) {  //privada
+bool operator<(const Nodo& n1, const Nodo& n2) {  
 	if (n1.consultar_frec() == n2.consultar_frec()) return (n1.consultar_caracter()) < (n2.consultar_caracter());
 	else return (n1.consultar_frec()) < (n2.consultar_frec());
 }
 
-bool operator==(const Nodo& n1, const Nodo& n2) {  //privada
+bool operator==(const Nodo& n1, const Nodo& n2) {  
 	if ((n1.consultar_caracter() == n2.consultar_caracter()) and (n1.consultar_frec() == n2.consultar_frec())) return true;
 	else return false;
 }
 
-void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {  // privada
+void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {  
 	bool insertado = false;
 	list<BinTree<Nodo>>::iterator it = l.begin();
 	while (not insertado) {
@@ -70,24 +59,28 @@ void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {  // p
 	}
 }
 
-//void Treecode::actualizar_treecode() {
+//void Treecode::actualizar_treecode() {const BinTree<Nodo>& a
 	
 //}
-/*
-string Treecode::codifica_camino(const Nodo& n, string& c) {
-	if (arbol.value() == n) return c;
-	else return codifica_camino(arbol.left(), n, c + "0") or codifica_camino(arbol.right(), n, c + "1");
+
+string Treecode::codifica_camino(const BinTree<Nodo>& a, string c) const {  // privada
+	if (a.value().consultar_caracter() == c) return "";
+	if (not a.left().empty() and a.left().value().consultar_caracter().find(c) != string::npos) 
+		return "0" + codifica_camino(a.left(), c);
+	return "1" + codifica_camino(a.right(), c);
 }
-*/
-void Treecode::crear_treecode(vector<Nodo> tabla) {
-	int n = tabla.size();
-	sort(tabla.begin(), tabla.end());
-	list<Nodo> hojas;
-	for (int i = 0; i < n; ++i) hojas.insert(hojas.end(), tabla[i]);
+
+string Treecode::codigo_nodo(const Nodo& n) {
+	string c = n.consultar_caracter();
+	string codigo = codifica_camino(arbol, c);
+	return codigo;
+}
+
+void Treecode::crear_treecode(vector<Nodo>& tabla) {
 	list<BinTree<Nodo>> subarboles;
-	while (not hojas.empty()) {
-		BinTree<Nodo> aux(hojas.front());
-		hojas.pop_front();
+	sort(tabla.begin(), tabla.end());
+	for (int i = 0; i < tabla.size(); ++i) {
+		BinTree<Nodo> aux(tabla[i]);
 		subarboles.insert(subarboles.end(), aux);
 	}
 	while (subarboles.size() > 1) {
@@ -98,21 +91,22 @@ void Treecode::crear_treecode(vector<Nodo> tabla) {
 		it = subarboles.erase(it);
         string suma_c2 = (*it).value().consultar_caracter();
         int suma_f2 = (*it).value().consultar_frec();
-        Nodo n1(suma_c1, suma_f1);  
-        Nodo n2(suma_c2, suma_f2); 
-        Nodo suma = suma_nodos(n1, n2);
+		string c;
+		int f = suma_f1 + suma_f2;
+		if (suma_c1 < suma_c2) c = suma_c1 + suma_c2;
+		else c = suma_c2 + suma_c1;
+        Nodo suma(c, f);
 		BinTree<Nodo> right = *it;
 		it = subarboles.erase(it);
 		BinTree<Nodo> a(suma, left, right);
 		anadir_elemento(subarboles, a);
-		arbol = a; 
 	}
+	arbol = subarboles.front();
 }
 
-void Treecode::escribir_treecode() {
+void Treecode::escribir_treecode() const {
 	cout << "recorrido en preorden:" << endl;
-	list<Nodo> L = preorden(arbol);
-	for (list<Nodo>::const_iterator it = L.begin(); it != L.end(); ++it) (*it).escribir();
+	preorden(arbol);
 	cout << "recorrido en inorden:" << endl;
 	inorden(arbol);
 }

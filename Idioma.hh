@@ -10,8 +10,8 @@
 
 #ifndef NO_DIAGRAM
 #include <vector>
-#include <map>
 #include <algorithm>
+#include <map>
 #endif
 
 /** @class Idioma
@@ -27,7 +27,7 @@ private:
     string nombre;                              // identificador
     vector<Nodo> tabla_frec;                    // tabla de frecuencias
     Treecode treecode;                          // treecode del idioma
-    map<string, string> d;                      // diccionario para consultar códigos, key: caracter a consultar, mapped value: código
+    map<string, string> diccionario;            // diccionario para consultar códigos, key: caracter a consultar, mapped value: código
   
 public:
 
@@ -67,31 +67,25 @@ public:
         \pre <em>cierto</em> 
         \post el resultado es el nombre del parámetro implícito
     */
-    string consultar_nombre();
-  
-    /** @brief Consulta la tabla de frecuencias de un idioma
-        \pre <em>cierto</em> 
-        \post el resultado es la tabla_frec del parámetro implícito
-    */
-    vector<Nodo> consultar_tabla_frec();
+    string consultar_nombre() const;
   
     /** @brief Consulta los códigos de un idioma
         \pre <em>cierto</em> 
         \post el resultado es el conjunto de códigos del parámetro implícito
     */
-    void consultar_codigos();
+    void consultar_codigos() const;
   
     /** @brief Consulta el código de un caracter de un idioma
         \pre el caracter c puede no estar en el diccionario d del parámetro implícito 
         \post el resultado es el código del caracter concreto si este existe, si no, se avisará 
     */
-    void consultar_codigo_especifico(string c);
+    void consultar_codigo_especifico(string c) const;
 	
 	/** @brief Consulta el treecode de un idioma
         \pre <em>cierto</em> 
         \post el resultado es el treecode del paràmetro implícito
     */
-	void consultar_treecode();
+	void consultar_treecode() const;
   
     // entrada/salida
 	
@@ -111,4 +105,3 @@ public:
     
 };
 #endif
-

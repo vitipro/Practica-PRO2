@@ -1,9 +1,7 @@
 #include "Idioma.hh"
 #include "Nodo.hh"           
 #include "Treecode.hh"
-#include <vector>
 #include <map>
-#include <algorithm>
 #include <iostream>
 using namespace std;
 
@@ -20,12 +18,8 @@ Idioma::~Idioma() {}
 	
 //}
 
-string Idioma::consultar_nombre() {
+string Idioma::consultar_nombre() const {
     return nombre;
-}
-
-vector<Nodo> Idioma::consultar_tabla_frec() {
-    return tabla_frec;
 }
 
 bool ordena(const Nodo& n1, const Nodo& n2) {
@@ -33,43 +27,37 @@ bool ordena(const Nodo& n1, const Nodo& n2) {
 }
 
 void Idioma::escribir_tabla_frec() {
-    int n = tabla_frec.size();
 	sort(tabla_frec.begin(), tabla_frec.end(), ordena);
-    for (int i = 0; i < n; ++i) tabla_frec[i].escribir();
+    for (int i = 0; i < tabla_frec.size(); ++i) tabla_frec[i].escribir();
     cout << endl;
 }
-/*
+
 void Idioma::asignar_codigos() {
-	int n = tabla_frec.size();
-	for (int i = 0; i < n; ++i) {
+	for (int i = 0; i < tabla_frec.size(); ++i) {
 		Nodo n = tabla_frec[i];
-		string c = n.consultar_caracter();
-		string codigo;
-		treecode.codifica_camino(n, codigo);
-		d.insert(make_pair(c, codigo));
+		string codigo = treecode.codigo_nodo(n);
+		diccionario.insert(make_pair(n.consultar_caracter(), codigo));
 	}
 }
-*/
-void Idioma::consultar_codigos() {
-    map<string, string>::const_iterator it = d.begin();
-    while (it != d.end()) {
+
+void Idioma::consultar_codigos() const {
+    map<string, string>::const_iterator it = diccionario.begin();
+    while (it != diccionario.end()) {
         cout << it->first << " " << it->second << endl;
         ++it;
     }
     cout << endl;
 }
 
-void Idioma::consultar_codigo_especifico(string c) {
-    map<string, string>::const_iterator it = d.find(c);
-    if (it == d.end()) cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
+void Idioma::consultar_codigo_especifico(string c) const {
+    map<string, string>::const_iterator it = diccionario.find(c);
+    if (it == diccionario.end()) cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
     else cout << it->first << " " << it->second << endl;
     cout << endl;
 }
 
-void Idioma::consultar_treecode() {
-    cout << "Treecode de " << nombre << ":" << endl;
-	BinTree<Nodo> a;
-	treecode.escribir_treecode(a);
+void Idioma::consultar_treecode() const {
+	treecode.escribir_treecode();
 }
 
 void Idioma::leer_idioma() {
@@ -83,5 +71,6 @@ void Idioma::leer_idioma() {
         v.push_back(n);
     }
     tabla_frec = v;
-    treecode.crear_treecode(tabla_frec);
+    treecode.crear_treecode(v);
+	asignar_codigos();
 }

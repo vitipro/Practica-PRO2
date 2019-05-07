@@ -52,8 +52,10 @@ int main() {
 		}
 		if (opcion == "treecode") {
 			cin >> id;
+			cout << "Treecode de " << id << ":" << endl;
 			if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_treecode();
 			else cout << "El idioma no existe" << endl;
+			cout << endl;
 		}
 		if (opcion == "codigos") {
 			string s;
@@ -61,12 +63,18 @@ int main() {
 			if (s == "todos") {
 				cout << "Codigos de " << id << ":" << endl;
 				if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_codigos();
-				else cout << "El idioma no existe" << endl;
+				else {
+					cout << "El idioma no existe" << endl;
+					cout << endl;
+				}
 			}
 			else {
 				cout << "Codigo de " << s << " en " << id << ":" << endl;
 				if (c.existe_idioma(id)) c.consultar_idioma(id).consultar_codigo_especifico(s);        // si el idioma existe pero el caracter no, consultar_codigo_especifico() avisará 
-				else cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
+				else {
+					cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
+					cout << endl;
+				}
 			}
 		}
 		cin >> opcion;

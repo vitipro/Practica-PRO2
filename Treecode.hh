@@ -28,29 +28,29 @@ private:
 
 	BinTree<Nodo> arbol;
 	
-	/** @brief Suma dos nodos 
+	/** @brief Recorre en preorden un árbol binario
 		\pre <em>cierto</em>
-        \post el resultado es un Nodo con caracter = concatenación (en orden lexicográfico) de caracteres de n1 y n2 y frec = frec n1 + frec n2
+        \post retorna el recorrido en preorden de T
     */
-	Nodo suma_nodos(const Nodo& n1, const Nodo& n2);
+	void preorden(const BinTree<Nodo>& T) const;
 	
-	/** @brief Recorre en preorden un árbol 
-		\pre <em>cierto</em>
-        \post retorna una lista con el recorrido en preorden de T
-    */
-	list<Nodo> preorden(const BinTree<Nodo>& T);
-	
-	/** @brief Recorre en inorden un árbol 
+	/** @brief Recorre en inorden un árbol binario
 		\pre <em>cierto</em>
         \post retorna el recorrido en inorden de T
     */
-	void inorden(const BinTree<Nodo>& T);
+	void inorden(const BinTree<Nodo>& T) const;
     
-	/** @brief Inserta un Nodo a una lista
-        \pre l está ordenada crecientemente
-        \post n queda insertado en su posición 
+	/** @brief Inserta un árbol binario a una lista
+        \pre l está ordenada crecientemente por frecuencia de su raíz y en caso de empate, por orden lexicográfico del caracter de la raíz
+        \post T queda insertado en su posición 
     */
     void anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T);
+	
+	/** @brief Codifica el camino hasta un Nodo
+		\pre c = caracter de un Nodo existente en el árbol del parámetro implícito 
+		\post el resultado es el camino del Nodo con caracter = c
+	*/
+	string codifica_camino(const BinTree<Nodo>& a, string c) const;
     
 public:
 
@@ -72,11 +72,11 @@ public:
 	
 	// consultoras
 	
-	/** @brief Consulta el código un Nodo
-		\pre <em>cierto</em> 
-		\post el resultado es el código del Nodo n
+	/** @brief Consulta el código de un Nodo
+		\pre n es un Nodo existente en el árbol del parámetro implícito 
+		\post el resultado es el código de Nodo 
 	*/
-	string codifica_camino(const Nodo& n, string& c); 
+	string codigo_nodo(const Nodo& n); 
 	
 	// entrada/salida
 
@@ -84,13 +84,13 @@ public:
         \pre tabla contiene Nodos en orden ascendente
         \post arbol del parámetro implícito pasa a ser un árbol que contiene los Nodos correspondientes
     */
-    void crear_treecode(vector<Nodo> tabla); 
+    void crear_treecode(vector<Nodo>& tabla); 
 
 	/** @brief Operación de escritura del treecode de un idioma
         \pre <em>cierto</em> 
         \post se escribe en el canal de salida estándard los recorridos en pre e inordren de T
     */
-    void escribir_treecode();  
+    void escribir_treecode() const;  
 	
 	~Treecode();
 	

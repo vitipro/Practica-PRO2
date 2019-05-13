@@ -1,5 +1,5 @@
 /** @file Idioma.hh
-    @brief Especificaci√≥n de la clase Idioma
+    @brief EspecificaciÛn de la clase Idioma
 */
 
 #ifndef _IDIOMA_HH_
@@ -12,12 +12,13 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <string>
 #endif
 
 /** @class Idioma
     @brief Representa un idioma 
     
-    Cada idioma contiene unos c√≥digos para cada uno de sus caracteres, usando una tabla de frecuencias. Con estos c√≥digos se quiere codificar y decodificar textos escritos
+    Cada idioma contiene unos cÛdigos para cada uno de sus caracteres, usando una tabla de frecuencias. Con estos cÛdigos se quiere codificar y decodificar textos escritos
 */
 
 class Idioma {
@@ -27,7 +28,6 @@ private:
     string nombre;                              // identificador
     vector<Nodo> tabla_frec;                    // tabla de frecuencias
     Treecode treecode;                          // treecode del idioma
-    map<string, string> diccionario;            // diccionario para consultar c√≥digos, key: caracter a consultar, mapped value: c√≥digo
   
 public:
 
@@ -35,7 +35,7 @@ public:
   
     /** @brief Creadora por defecto de un idioma
      
-        Cuando se declara se ejecuta autom√°ticamente
+        Cuando se declara se ejecuta autom·ticamente
         \pre <em>cierto</em> 
         \post el resultado es un Idioma sin nombre ni tabla_frec
     */
@@ -51,53 +51,65 @@ public:
     
     /** @brief Modifica la tabla de frecuencias de un idioma
         \pre <em>cierto</em> 
-        \post se a√±aden a tabla_frec del par√°metro impl√≠cito las frecuencias de la nueva tabla
+        \post se aÒaden a tabla_frec del par·metro implÌcito las frecuencias de la nueva tabla
     */
-    void modificar_tabla(vector<Nodo>& tabla);
-	
-	/** @brief Asigna los c√≥digos de caracter a un idioma
-        \pre <em>cierto</em> 
-        \post se a√±aden a d del par√°metro impl√≠cito los c√≥digos de sus caracteres
-    */
-	void asignar_codigos();
+    void modificar_tabla(vector<Nodo> tabla);
 	
     // consultoras
 	
 	/** @brief Consulta el nombre de un idioma
         \pre <em>cierto</em> 
-        \post el resultado es el nombre del par√°metro impl√≠cito
+        \post el resultado es el nombre del par·metro implÌcito
     */
     string consultar_nombre() const;
   
-    /** @brief Consulta los c√≥digos de un idioma
+	/** @brief Consulta la tabla de frecuencias de un idioma
         \pre <em>cierto</em> 
-        \post el resultado es el conjunto de c√≥digos del par√°metro impl√≠cito
+        \post el resultado es tabla_frec del par·metro implÌcito
+    */
+    vector<Nodo> consultar_tabla() const;
+  
+    /** @brief Consulta los cÛdigos de un idioma
+        \pre <em>cierto</em> 
+        \post el resultado es el conjunto de cÛdigos del par·metro implÌcito
     */
     void consultar_codigos() const;
   
-    /** @brief Consulta el c√≥digo de un caracter de un idioma
-        \pre el caracter c puede no estar en el diccionario d del par√°metro impl√≠cito 
-        \post el resultado es el c√≥digo del caracter concreto si este existe, si no, se avisar√° 
+    /** @brief Consulta el cÛdigo de un caracter de un idioma
+        \pre el caracter c puede no estar en el diccionario d del par·metro implÌcito 
+        \post el resultado es el cÛdigo del caracter concreto si este existe, si no, se avisar· 
     */
     void consultar_codigo_especifico(string c) const;
 	
 	/** @brief Consulta el treecode de un idioma
         \pre <em>cierto</em> 
-        \post el resultado es el treecode del par√†metro impl√≠cito
+        \post el resultado es el treecode del par‡metro implÌcito
     */
 	void consultar_treecode() const;
   
     // entrada/salida
 	
-	/** @brief Operaci√≥n de escritura de tabla_frec
+	/** @brief Codifica un texto en un idioma
+        \pre en la entrada se encuentra un string texto a codificar
+        \post se escribe en el canal de salida la codificaciÛn del texto en el idioma si se puede
+    */
+	void codifica(string texto);
+	
+	/** @brief Decodifica un texto en un idioma
+        \pre en la entrada se encuentra un string texto a decodificar
+        \post se escribe en el canal de salida el texto decodificado si se puede
+    */
+	void decodifica(string texto);
+	
+	/** @brief OperaciÛn de escritura de tabla_frec
         \pre <em>cierto</em>
-        \post se escribe en el canal de salida est√°ndard tabla_frec
+        \post se escribe en el canal de salida est·ndard tabla_frec
     */
 	void escribir_tabla_frec();
     
-    /** @brief Operaci√≥n de lectura de un idioma
+    /** @brief OperaciÛn de lectura de un idioma
         \pre en la entrada se encuentra un string y una seguido de Nodos (vector)
-        \post el par√°metro impl√≠cito pasa a tener nombre y tabla_frec 
+        \post el par·metro implÌcito pasa a tener nombre y tabla_frec 
     */
     void leer_idioma();
   

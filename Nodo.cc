@@ -1,6 +1,4 @@
 #include "Nodo.hh"
-#include <iostream>
-using namespace std;
 
 Nodo::Nodo() {
     caracter = "";

@@ -1,5 +1,5 @@
 /** @file Nodo.hh
-    @brief Especificación de la clase Nodo
+    @brief Especificaci�n de la clase Nodo
 */
 
 #ifndef _NODO_HH_
@@ -11,7 +11,7 @@ using namespace std;
 #endif
 
 /** @class Nodo
-    @brief Representa un nodo del treecode de un idioma, con 2 atributos, un caracter y una frecuencia 
+    @brief Representa un nodo del treecode de un idioma 
 */
 
 class Nodo {
@@ -19,16 +19,15 @@ class Nodo {
 private:
   
     string caracter;        
-    int frec;        
+    int frec; 
 	
-  
 public:
 
     // constructoras
   
     /** @brief Creadora por defecto de un nodo
 
-        Cuando se declara se ejecuta automáticamente
+        Cuando se declara se ejecuta autom�ticamente
         \pre <em>cierto</em> 
         \post el resultado es un Nodo sin caracter ni frec
     */
@@ -42,33 +41,31 @@ public:
   
     // modificadoras
   
-    //     void modif_nodo();      // ¿?
-  
     // consultoras
     
     /** @brief Consultora del caracter de un nodo
         \pre <em>cierto</em> 
-        \post el resultado es el atributo caracter del parámetro implícito
+        \post el resultado es el atributo caracter del par�metro impl�cito
     */
     string consultar_caracter() const;
     
     /** @brief Consultora de la frecuencia de un nodo 
         \pre <em>cierto</em> 
-        \post el resultado es el atributo frec del parámetro implícito
+        \post el resultado es el atributo frec del par�metro impl�cito
     */
     int consultar_frec() const;
   
     // entrada/salida
     
-    /** @brief Operación de lectura de un nodo 
+    /** @brief Operaci�n de lectura de un nodo 
         \pre en la entrada se encuentra un string y un entero
-        \post el string pasa a ser el atributo caracter y el entero el atributo frec del parámetro implícito
+        \post el string pasa a ser el atributo caracter y el entero el atributo frec del par�metro impl�cito
     */
     void leer();
   
-    /** @brief Operación de escritura de un nodo
+    /** @brief Operaci�n de escritura de un nodo
         \pre <em>cierto</em>  
-        \post se escriben los atributos caracter y frec del parámetro implícito
+        \post se escriben los atributos caracter y frec del par�metro impl�cito
     */
     void escribir() const;               
   
@@ -77,4 +74,3 @@ public:
 };
 #endif
   
-

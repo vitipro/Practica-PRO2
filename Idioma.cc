@@ -1,22 +1,16 @@
 #include "Idioma.hh"
-#include "Nodo.hh"           
-#include "Treecode.hh"
-#include <map>
-#include <iostream>
-using namespace std;
 
 Idioma::Idioma() {}
 
 Idioma::~Idioma() {}
 
-//Idioma::Idioma(string id, vector<Nodo> v) {
-//    this->nombre = id;
-//    this->tabla_frec = v;
-//}
+void Idioma::modificar_tabla(vector<Nodo> tabla) {
+		
+}
 
-//void Idioma::modificar_tabla(vector<Nodo>& tabla) {
-	
-//}
+vector<Nodo> Idioma::consultar_tabla() const {
+	return tabla_frec;
+}
 
 string Idioma::consultar_nombre() const {
     return nombre;
@@ -32,28 +26,12 @@ void Idioma::escribir_tabla_frec() {
     cout << endl;
 }
 
-void Idioma::asignar_codigos() {
-	for (int i = 0; i < tabla_frec.size(); ++i) {
-		Nodo n = tabla_frec[i];
-		string codigo = treecode.codigo_nodo(n);
-		diccionario.insert(make_pair(n.consultar_caracter(), codigo));
-	}
-}
-
 void Idioma::consultar_codigos() const {
-    map<string, string>::const_iterator it = diccionario.begin();
-    while (it != diccionario.end()) {
-        cout << it->first << " " << it->second << endl;
-        ++it;
-    }
-    cout << endl;
+	treecode.consultar_codigos();
 }
 
 void Idioma::consultar_codigo_especifico(string c) const {
-    map<string, string>::const_iterator it = diccionario.find(c);
-    if (it == diccionario.end()) cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
-    else cout << it->first << " " << it->second << endl;
-    cout << endl;
+    treecode.consultar_codigo_especifico(c);
 }
 
 void Idioma::consultar_treecode() const {
@@ -72,5 +50,13 @@ void Idioma::leer_idioma() {
     }
     tabla_frec = v;
     treecode.crear_treecode(v);
-	asignar_codigos();
 }
+
+void Idioma::codifica(string texto) {
+	treecode.codifica(texto);
+}
+
+void Idioma::decodifica(string texto) {
+	treecode.decodifica(texto);
+}
+    

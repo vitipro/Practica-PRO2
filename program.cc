@@ -1,9 +1,9 @@
 /** 
-	@mainpage Codificaci√≥n y decodificaci√≥n 
+	@mainpage CodificaciÛn y decodificaciÛn 
 	
-	Se ha construido un programa poniendo en pr√°ctica dise√±o modular, cuya funci√≥n es codificar y decodificar textos escritos usando diferentes idiomas.
+	Se ha construido un programa poniendo en pr·ctica diseÒo modular, cuya funciÛn es codificar y decodificar textos escritos usando diferentes idiomas.
 	
-	Este contiene un men√∫ con diferentes opciones para tambi√©n obtener informaci√≥n de los diferentes idiomas y sus codificaciones.
+	Este contiene un men˙ con diferentes opciones para tambiÈn obtener informaciÛn de los diferentes idiomas y sus codificaciones.
 */
 	
 /** @file main.cc
@@ -24,24 +24,42 @@ int main() {
 	string opcion;
 	while (opcion != "fin") {
 		string id;
-		/*if (opcion == "a√±adir/modificar") {
+		if (opcion == "anadir/modificar") {
 			Idioma I;
 			I.leer_idioma();
 			id = I.consultar_nombre();
-			if (c.existe_idioma(id)) c.modificar_idioma(I);
-			else c.anadir_idioma(I);
+			if (c.existe_idioma(id)) {
+				map<string, Idioma>::iterator it = c.consultar_idioma(id);
+				(it->second).modificar_tabla(I.consultar_tabla());
+				cout << "Modificado " << id << endl << endl;
+			}
+			else {
+				c.anadir_idioma(I);
+				cout << "Anadido " << id << endl << endl;
+			}
 		}
 		if (opcion == "codifica") {
 			string texto;
 			cin >> id >> texto;
-			c.codifica_idioma(id, texto);        // codifica_idioma ya dir√° si el idioma existe o si es codificable
+			cout << "Codifica en " << id << " el texto:" << endl;
+			cout << texto << endl;
+			if (c.existe_idioma(id)) {
+				map<string, Idioma>::iterator it = c.consultar_idioma(id);
+				(it->second).codifica(texto);
+			}
+			else cout << "El idioma no existe" << endl << endl;        
 		}
 		if (opcion == "decodifica") {
 			string texto;
 			cin >> id >> texto;
-			c.decodifica_idioma(id, texto);     // decodifica_idioma ya dir√° si el idioma existe o si es decodificable
+			cout << "Decodifica en " << id << " el texto:" << endl;
+			cout << texto << endl;
+			if (c.existe_idioma(id)) {
+				map<string, Idioma>::iterator it = c.consultar_idioma(id);
+				(it->second).decodifica(texto);
+			}
+			else cout << "El idioma no existe" << endl << endl;         
 		}
-		}*/
 		if (opcion == "tabla_frec") {
 			cin >> id;
 			cout << "Tabla de frecuencias de " << id << ":" << endl;
@@ -49,10 +67,7 @@ int main() {
 				map<string, Idioma>::iterator it = c.consultar_idioma(id);
 				(it->second).escribir_tabla_frec();
 			}
-			else {
-				cout << "El idioma no existe" << endl;
-				cout << endl;
-			}
+			else cout << "El idioma no existe" << endl << endl;
 		}
 		if (opcion == "treecode") {
 			cin >> id;
@@ -61,8 +76,7 @@ int main() {
 				map<string, Idioma>::iterator it = c.consultar_idioma(id);
 				(it->second).consultar_treecode();
 			}
-			else cout << "El idioma no existe" << endl;
-			cout << endl;
+			else cout << "El idioma no existe" << endl << endl;
 		}
 		if (opcion == "codigos") {
 			string s;
@@ -73,21 +87,15 @@ int main() {
 					map<string, Idioma>::iterator it = c.consultar_idioma(id);
 					(it->second).consultar_codigos();
 				}
-				else {
-					cout << "El idioma no existe" << endl;
-					cout << endl;
-				}
+				else cout << "El idioma no existe" << endl << endl;
 			}
 			else {
 				cout << "Codigo de " << s << " en " << id << ":" << endl;
 				if (c.existe_idioma(id)) {
 					map<string, Idioma>::iterator it = c.consultar_idioma(id);    
-					(it->second).consultar_codigo_especifico(s);                                     // si el idioma existe pero el caracter no, consultar_codigo_especifico() avisar√° 
+					(it->second).consultar_codigo_especifico(s);                                      
 				}
-				else {
-					cout << "El idioma no existe o el caracter no esta en el idioma" << endl;
-					cout << endl;
-				}
+				else cout << "El idioma no existe o el caracter no esta en el idioma" << endl << endl;
 			}
 		}
 		cin >> opcion;

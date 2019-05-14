@@ -1,5 +1,8 @@
 OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11 
 
+practica.tar: program.cc Cjto_idiomas.cc Idioma.cc Nodo.cc Treecode.cc Cjto_idiomas.hh Idioma.hh Nodo.hh Treecode.hh Makefile 
+	tar -cvf practica.tar program.cc Cjto_idiomas.cc Idioma.cc Nodo.cc Treecode.cc Cjto_idiomas.hh Idioma.hh Nodo.hh Treecode.hh Makefile
+
 program.exe: program.o Cjto_idiomas.o Idioma.o Nodo.o Treecode.o
 	g++ -o program.exe program.o Idioma.o Cjto_idiomas.o Nodo.o Treecode.o
 

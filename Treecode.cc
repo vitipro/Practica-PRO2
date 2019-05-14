@@ -167,4 +167,3 @@ void Treecode::decodifica(string texto) {
 	else cout << "El texto no procede de una codificacion del idioma; ultima posicion del codigo correspondiente al ultimo caracter que se podria decodificar: " << pos << endl << endl;
 	invertir_diccionario();
 }
-	

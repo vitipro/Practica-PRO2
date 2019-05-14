@@ -12,6 +12,10 @@ Nodo::Nodo(string c, int f) {
     frec = f;
 }
 
+void Nodo::modif_frec_nodo(int f) {
+	frec = f;
+}
+
 string Nodo::consultar_caracter() const {
     return caracter;
 }

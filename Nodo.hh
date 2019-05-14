@@ -26,7 +26,6 @@ public:
     // constructoras
   
     /** @brief Creadora por defecto de un nodo
-
         Cuando se declara se ejecuta automáticamente
         \pre <em>cierto</em> 
         \post el resultado es un Nodo sin caracter ni frec
@@ -40,6 +39,12 @@ public:
     Nodo(string c, int f);      
   
     // modificadoras
+	
+	/** @brief Modifica la frecuencia de un Nodo
+        \pre <em>cierto</em> 
+        \post el resultado es un Nodo con el mismo caracter y frec = f
+    */
+    void modif_frec_nodo(int f); 
   
     // consultoras
     

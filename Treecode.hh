@@ -5,14 +5,17 @@
 #ifndef _TREECODE_HH_
 #define _TREECODE_HH_
 
-#include "Nodo.hh"
+//#include "Nodo.hh"
 
 #ifndef NO_DIAGRAM
+#include <iostream>
+using namespace std;
 #include "BinTree.hh"
-#include <vector>
+//#include <vector>
 #include <list>
 #include <algorithm>
 #include <map>
+#include <set>
 #include <string>
 #endif
 
@@ -26,32 +29,32 @@ class Treecode {
 	
 private:
 
-	BinTree<Nodo> arbol;
+	BinTree<pair<string, int>> arbol;
 	map<string, string> diccionario;                   // diccionario para consultar códigos, key: caracter a consultar, mapped value: código
 	
 	/** @brief Recorre en preorden un árbol binario
 		\pre <em>cierto</em>
         \post retorna el recorrido en preorden de T
     */
-	void preorden(const BinTree<Nodo>& T) const;
+	void preorden(const BinTree<pair<string, int>>& T) const;
 	
 	/** @brief Recorre en inorden un árbol binario
 		\pre <em>cierto</em>
         \post retorna el recorrido en inorden de T
     */
-	void inorden(const BinTree<Nodo>& T) const;
-    
+	void inorden(const BinTree<pair<string, int>>& T) const;
+	
 	/** @brief Inserta un árbol binario a una lista
         \pre l está ordenada crecientemente por frecuencia de su raíz y en caso de empate, por orden lexicográfico del caracter de la raíz
         \post T queda insertado en su posición 
     */
-    void anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T);
+    void anadir_elemento(list<BinTree<pair<string, int>>>& l, BinTree<pair<string, int>>& T);
 	
 	/** @brief Codifica los caminos de a
 		\pre <em>cierto</em>
 		\post el resultado es el árbol a codificado
 	*/
-	void codifica_arbol(const BinTree<Nodo>& a, string c);
+	void codifica_arbol(const BinTree<pair<string, int>>& a, string c);
 	
 	/** @brief Consulta si un texto es decodificable en un idioma
 		\pre <em>cierto</em>
@@ -69,7 +72,7 @@ private:
 		\pre <em>cierto</em>
 		\post el resultado es la altura de a
 	*/
-	int altura_treecode(const BinTree<Nodo>& a);
+	int altura_treecode(const BinTree<pair<string, int>>& a);
     
 public:
 
@@ -115,7 +118,7 @@ public:
         \pre tabla contiene Nodos en orden ascendente
         \post arbol del parámetro implícito pasa a ser un árbol que contiene los Nodos correspondientes
     */
-    void crear_treecode(vector<Nodo>& tabla); 
+    void crear_treecode(map<string, int>& tabla); 
 
 	/** @brief Operación de escritura del treecode de un idioma
         \pre <em>cierto</em> 

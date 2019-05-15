@@ -4,23 +4,23 @@ Treecode::Treecode() {}
 
 Treecode::~Treecode() {}
  
-void Treecode::preorden(const BinTree<Nodo>& T) const {
+void Treecode::preorden(const BinTree<pair<string, int>>& T) const {
 	if (not T.empty()) {
-		T.value().escribir();
+		cout << T.value().first << " " << T.value().second << endl;
 		preorden(T.left());
 		preorden(T.right());
 	}
 }
 
-void Treecode::inorden(const BinTree<Nodo>& T) const {
+void Treecode::inorden(const BinTree<pair<string, int>>& T) const {
 	if (not T.empty()) {
 		inorden(T.left());
-		T.value().escribir();
+		cout << T.value().first << " " << T.value().second << endl;
 		inorden(T.right());
 	}
 }
 
-int Treecode::altura_treecode(const BinTree<Nodo>& a) {
+int Treecode::altura_treecode(const BinTree<pair<string, int>>& a) {
 	if (a.empty()) return 0;
 	else return 1 + max(altura_treecode(a.left()), altura_treecode(a.right()));
 }
@@ -35,29 +35,19 @@ void Treecode::invertir_diccionario() {
 	diccionario = aux;
 }
 
-bool operator<(const Nodo& n1, const Nodo& n2) {  
-	if (n1.consultar_frec() == n2.consultar_frec()) return (n1.consultar_caracter()) < (n2.consultar_caracter());
-	else return (n1.consultar_frec()) < (n2.consultar_frec());
-}
-
-bool operator==(const Nodo& n1, const Nodo& n2) {  
-	if ((n1.consultar_caracter() == n2.consultar_caracter()) and (n1.consultar_frec() == n2.consultar_frec())) return true;
-	else return false;
-}
-
-void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {  
+void Treecode::anadir_elemento(list<BinTree<pair<string, int>>>& l, BinTree<pair<string, int>>& T) {  
 	bool insertado = false;
-	list<BinTree<Nodo>>::iterator it = l.begin();
+	list<BinTree<pair<string, int>>>::iterator it = l.begin();
 	while (not insertado) {
 		if (it == l.end()) {
 			l.insert(l.end(), T);
 			insertado = true;
 		}
-		else if (T.value().consultar_frec() < (*it).value().consultar_frec()) {
+		else if (T.value().second < (*it).value().second) {
 			l.insert(it, T);
 			insertado = true;
 		}
-		else if (T.value().consultar_frec() == (*it).value().consultar_frec()) {
+		else if (T.value().second == (*it).value().second) {
             if (T.value() < (*it).value()) {
                 l.insert(it, T);
                 insertado = true;
@@ -68,12 +58,11 @@ void Treecode::anadir_elemento(list<BinTree<Nodo>>& l, BinTree<Nodo>& T) {
 	}
 }
 
-void Treecode::codifica_arbol(const BinTree<Nodo>& a, string c) {  
+void Treecode::codifica_arbol(const BinTree<pair<string, int>>& a, string c) {  
 	if (not a.left().empty()) codifica_arbol(a.left(), c + "0"); 
 	if (not a.right().empty()) codifica_arbol(a.right(), c + "1"); 
 	if (a.left().empty() and a.right().empty()) {
-		string k = a.value().consultar_caracter();
-		diccionario[k] = c;
+		diccionario[a.value().first] = c;
 	}
 }
 
@@ -93,34 +82,33 @@ void Treecode::consultar_codigo_especifico(string c) const {
 	cout << endl;
 }
 
-void Treecode::crear_treecode(vector<Nodo>& tabla) {
-	list<BinTree<Nodo>> subarboles;
-	sort(tabla.begin(), tabla.end());
-	for (int i = 0; i < tabla.size(); ++i) {
-		BinTree<Nodo> aux(tabla[i]);
-		subarboles.insert(subarboles.end(), aux);
+void Treecode::crear_treecode(map<string, int>& tabla) {
+	list<BinTree<pair<string, int>>> subarboles;
+	map<string, int>::const_iterator it = tabla.begin();
+	while (it != tabla.end()) {
+		BinTree<pair<string, int>> aux(*it);                                   
+		anadir_elemento(subarboles, aux);                                               // creamos una lista de árboles con nodo elementos de la tabla de frecuencias
+		++it;
 	}
 	while (subarboles.size() > 1) {
-		list<BinTree<Nodo>>::iterator it = subarboles.begin();
-		string suma_c1 = (*it).value().consultar_caracter();
-		int suma_f1 = (*it).value().consultar_frec();
-		BinTree<Nodo> left = *it;
-		it = subarboles.erase(it);
-        string suma_c2 = (*it).value().consultar_caracter();
-        int suma_f2 = (*it).value().consultar_frec();
-		string c;
-		int f = suma_f1 + suma_f2;
-		if (suma_c1 < suma_c2) c = suma_c1 + suma_c2;
-		else c = suma_c2 + suma_c1;
-        Nodo suma(c, f);
-		BinTree<Nodo> right = *it;
-		it = subarboles.erase(it);
-		BinTree<Nodo> a(suma, left, right);
-		anadir_elemento(subarboles, a);
+		string suma_c;
+		int suma_f;
+		list<BinTree<pair<string, int>>>::iterator it = subarboles.begin();
+		suma_c = (*it).value().first;
+		suma_f = (*it).value().second;
+		BinTree<pair<string, int>> left = *it;                                          // cogemos el primer elemento de la lista y o guardamos
+		it = subarboles.erase(it);                                                      // borramos elemento
+		if (suma_c < (*it).value().first) suma_c += (*it).value().first;                // sumamos los nodos del elemento borrado y el siguiente para crear el nodo del nuevo árbol
+		else suma_c = (*it).value().first + suma_c;                                     // respetando lexicográficamente
+		suma_f += (*it).value().second;
+		BinTree<pair<string, int>> right = *it;                                         // cogemos el siguiente elemento y lo guardamos
+		it = subarboles.erase(it);                                                      // lo borramos también
+		BinTree<pair<string, int>> a(make_pair(suma_c, suma_f), left, right);           // creamos el nuevo árbol suma 
+		anadir_elemento(subarboles, a);                                                 // y lo volvemos a insertar en la lista
 	}
 	arbol = subarboles.front();
-	string c;
-	codifica_arbol(arbol, c);
+	string codigo;
+	codifica_arbol(arbol, codigo);
 }
 
 void Treecode::escribir_treecode() const {

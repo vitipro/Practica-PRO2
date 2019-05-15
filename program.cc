@@ -24,16 +24,16 @@ int main() {
 	string opcion;
 	while (opcion != "fin") {
 		string id;
-		if (opcion == "anadir/modificar") {
-			Idioma I;
-			I.leer_idioma();
-			id = I.consultar_nombre();
+		if (opcion == "anadir/modificar") { 
+			cin >> id;
 			if (c.existe_idioma(id)) {
 				map<string, Idioma>::iterator it = c.consultar_idioma(id);
-				(it->second).modificar_tabla(I.consultar_tabla());
+				(it->second).modificar_tabla();
 				cout << "Modificado " << id << endl << endl;
 			}
 			else {
+				Idioma I;
+				I.crea_idioma(id);
 				c.anadir_idioma(I);
 				cout << "Anadido " << id << endl << endl;
 			}

@@ -5,7 +5,7 @@
 #ifndef _IDIOMA_HH_
 #define _IDIOMA_HH_
 
-#include "Nodo.hh"           
+//#include "Nodo.hh"           
 #include "Treecode.hh"
 
 #ifndef NO_DIAGRAM
@@ -26,7 +26,7 @@ class Idioma {
 private:
 
     string nombre;                              // identificador
-    vector<Nodo> tabla_frec;                    // tabla de frecuencias
+    map<string, int> tabla_frec;                // tabla de frecuencias
     Treecode treecode;                          // treecode del idioma
   
 public:
@@ -39,13 +39,13 @@ public:
         \pre <em>cierto</em> 
         \post el resultado es un Idioma sin nombre ni tabla_frec
     */
-    Idioma();             
-  
- //   /** @brief Creadora de un idioma con nombre
- //       \pre <em>cierto</em> 
- //       \post el resultado es un idioma con nombre = id 
- //   */
- //   Idioma(string id); 
+    Idioma();        
+
+	/** @brief Copia de un idioma a través de nombre concreto
+		\pre <em>cierto</em> 
+		\post el resultado es un idioma con nombre = id 
+    */
+    void crea_idioma(string id);
 
     // modificadoras
     
@@ -53,7 +53,7 @@ public:
         \pre <em>cierto</em> 
         \post se añaden a tabla_frec del parámetro implícito las frecuencias de la nueva tabla
     */
-    void modificar_tabla(vector<Nodo> tabla);
+    void modificar_tabla();
 	
     // consultoras
 	
@@ -62,12 +62,6 @@ public:
         \post el resultado es el nombre del parámetro implícito
     */
     string consultar_nombre() const;
-  
-	/** @brief Consulta la tabla de frecuencias de un idioma
-        \pre <em>cierto</em> 
-        \post el resultado es tabla_frec del parámetro implícito
-    */
-    vector<Nodo> consultar_tabla() const;
   
     /** @brief Consulta los códigos de un idioma
         \pre <em>cierto</em> 
@@ -100,6 +94,12 @@ public:
         \post se escribe en el canal de salida el texto decodificado si se puede
     */
 	void decodifica(string texto);
+	
+	/** @brief Operación de lectura de tabla_frec
+        \pre <em>cierto</em>
+        \post se lee en el canal de salida el tamaño y los datos de tabla_frec
+    */
+	void leer_tabla_frec();
 	
 	/** @brief Operación de escritura de tabla_frec
         \pre <em>cierto</em>

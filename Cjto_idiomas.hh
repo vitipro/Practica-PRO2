@@ -44,12 +44,6 @@ public:
     */
     void anadir_idioma(Idioma& I);
     
-//    /** @brief Modifica un idioma del conjunto
-//        \pre I está en el conjunto
-//        \post I ha estado modificado
-//    */
-//    void modificar_idioma(Idioma& I) const;
-    
     // consultoras
   
     /** @brief Consulta si cierto idioma está en el conjunto

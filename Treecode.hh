@@ -5,17 +5,12 @@
 #ifndef _TREECODE_HH_
 #define _TREECODE_HH_
 
-//#include "Nodo.hh"
-
 #ifndef NO_DIAGRAM
 #include <iostream>
 using namespace std;
 #include "BinTree.hh"
-//#include <vector>
 #include <list>
-#include <algorithm>
 #include <map>
-#include <set>
 #include <string>
 #endif
 

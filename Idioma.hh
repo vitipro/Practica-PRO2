@@ -4,12 +4,10 @@
 
 #ifndef _IDIOMA_HH_
 #define _IDIOMA_HH_
-
-//#include "Nodo.hh"           
+          
 #include "Treecode.hh"
 
 #ifndef NO_DIAGRAM
-#include <vector>
 #include <algorithm>
 #include <map>
 #include <string>

@@ -15,67 +15,60 @@ using namespace std;
 #endif
 
 /** @class Treecode
-    @brief Representa un treecode de un idioma 
+    @brief Representa un treecode de un idioma.
     
-	Se trata de un árbol binario con nodos de tipo Nodo
+	Se trata de un árbol binario codificado de pares <string, int>.
 */
 
 class Treecode {
 	
 private:
 
+	/** @brief Árbol binario */
 	BinTree<pair<string, int>> arbol;
-	map<string, string> diccionario;                   // diccionario para consultar códigos, key: caracter a consultar, mapped value: código
+	/** @brief Diccionario para consultar códigos
+
+		La llave representa el caracter a consultar, y el mapped value representa el código
+	*/
+	map<string, string> diccionario;                   
 	
-	/** @brief Recorre en preorden un árbol binario
+	/** @brief Recorre en preorden un árbol binario.
 		\pre <em>cierto</em>
-        \post retorna el recorrido en preorden de T
+        \post Retorna el recorrido en preorden de T.
     */
 	void preorden(const BinTree<pair<string, int>>& T) const;
 	
-	/** @brief Recorre en inorden un árbol binario
+	/** @brief Recorre en inorden un árbol binario.
 		\pre <em>cierto</em>
-        \post retorna el recorrido en inorden de T
+        \post Retorna el recorrido en inorden de T.
     */
 	void inorden(const BinTree<pair<string, int>>& T) const;
 	
-	/** @brief Inserta un árbol binario a una lista
-        \pre l está ordenada crecientemente por frecuencia de su raíz y en caso de empate, por orden lexicográfico del caracter de la raíz
-        \post T queda insertado en su posición 
+	/** @brief Inserta un árbol binario a una lista.
+        \pre l está ordenada crecientemente por frecuencia de su raíz y en caso de empate, por orden lexicográfico del caracter de la raíz.
+        \post T queda insertado en su posición. 
     */
-    void anadir_elemento(list<BinTree<pair<string, int>>>& l, BinTree<pair<string, int>>& T);
+    void anadir_elemento(list<BinTree<pair<string, int>>>& l, BinTree<pair<string, int>>& T);    // PROBAR TAMBIÉN CON SETS!!!!!
 	
-	/** @brief Codifica los caminos de a
+	/** @brief Codifica los caminos del árbol a.
 		\pre <em>cierto</em>
-		\post el resultado es el árbol a codificado
+		\post El resultado es el árbol a codificado.
 	*/
 	void codifica_arbol(const BinTree<pair<string, int>>& a, string c);
 	
-	/** @brief Consulta si un texto es decodificable en un idioma
-		\pre <em>cierto</em>
-		\post el resultado es true si el string texto es decodificable usando el diccionario del parámetro implícito
-	*/
-	bool decodificable(string texto, int i, int j, int& cont);
-	
-	/** @brief Invierte un diccionario
-		\pre <em>cierto</em>
-		\post el resultado es el diccionario del parámetro implícito invertido, es decir, los datos de la key pasan a ser los mapped values y viceversa
-	*/
-	void invertir_diccionario();
-	
-	/** @brief Consulta la altura de un árbol 
-		\pre <em>cierto</em>
-		\post el resultado es la altura de a
-	*/
-	int altura_treecode(const BinTree<pair<string, int>>& a);
+	/** @brief Función de inmersión para decodificar un texto en un idioma.
+        \pre 0 <= pos <= texto.length()
+        \post El resultado es la decodificación de texto si éste se puede decodificar. De otra manera, se avisará que no se puede y escribirá la última posición decodificable. 
+    */
+	void dec_inmersion(const BinTree<pair<string, int>>& a, string& texto, string& txt_dec, bool& decodificable, int& pos, int& ult_pos);
     
 public:
 
 	// creadoras
 	
-	/** @brief Creadora por defecto de un treecode
+	/** @brief Creadora por defecto de un treecode.
         \pre <em>cierto</em> 
-        \post el resultado es un BinTree vacío  
+        \post El resultado es un BinTree arbol y diccionario vacíos.  
     */
     Treecode();
 
@@ -83,41 +76,41 @@ public:
 	
 	// consultoras 
 	
-	/** @brief Consulta los códigos del treecode de un idioma
+	/** @brief Consulta los códigos del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post el resultado es el conjunto de códigos del parámetro implícito 
+        \post El resultado es el conjunto de códigos de diccionario del parámetro implícito. 
     */
 	void consultar_codigos() const;
 	
-	/** @brief Consulta el código de un caracter del treecode de un idioma
+	/** @brief Consulta el código de un caracter del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post el resultado es el código del caracter de una hoja, si existe 
+        \post El resultado es el código del caracter de una hoja, si existe. Si no, se avisará. 
     */
 	void consultar_codigo_especifico(string c) const;	
 
 	// entrada/salida
 	
-	/** @brief Codifica un texto en un idioma
-        \pre en la entrada se encuentra un string texto a codificar
-        \post se escribe en el canal de salida la codificación del texto en el idioma si se puede
+	/** @brief Codifica un texto en un idioma.
+        \pre En el canal de entrada estándard se encuentra un string texto a codificar.
+        \post Se escribe en el canal de salida estándard la codificación del texto en el idioma, si se puede.
     */
 	void codifica(string texto);
 	
-	/** @brief Decodifica un texto en un idioma
-        \pre en la entrada se encuentra un string texto a decodificar
-        \post se escribe en el canal de salida el texto decodificado si se puede
+	/** @brief Decodifica un texto en un idioma.
+        \pre En el canal de entrada estándard se encuentra un string texto a decodificar.
+        \post Se escribe en el canal de salida estándard el texto decodificado, si se puede.
     */
 	void decodifica(string texto);
 
-	/** @brief Operación de construcción del treecode de un idioma
-        \pre tabla contiene Nodos en orden ascendente
-        \post arbol del parámetro implícito pasa a ser un árbol que contiene los Nodos correspondientes
+	/** @brief Operación de construcción del treecode de un idioma.
+        \pre tabla está ordenada ascendentemente por frecuencias.
+        \post arbol del parámetro implícito pasa a ser un árbol binario codificado que contiene los nodos <string, int> correspondientes.
     */
     void crear_treecode(map<string, int>& tabla); 
 
-	/** @brief Operación de escritura del treecode de un idioma
+	/** @brief Operación de escritura del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post se escribe en el canal de salida estándard los recorridos en pre e inordren de T
+        \post Se escriben en el canal de salida estándard los recorridos en pre e inordren de T.
     */
     void escribir_treecode() const;  
 	

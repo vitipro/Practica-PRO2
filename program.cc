@@ -1,14 +1,13 @@
+/** @file program.cc
+	@brief Programa principal
+*/
+
 /** 
 	@mainpage Codificación y decodificación 
 	
 	Se ha construido un programa poniendo en práctica diseño modular, cuya función es codificar y decodificar textos escritos usando diferentes idiomas.
 	
 	Este contiene un menú con diferentes opciones para también obtener información de los diferentes idiomas y sus codificaciones.
-*/
-	
-/** @file main.cc
-	@brief Programa principal
-	
 */
 
 #include "Cjto_idiomas.hh"
@@ -18,12 +17,13 @@
 using namespace std;
 #endif
 
-int main() {
+int main() 
+{
 	Cjto_idiomas c;
 	c.leer_conjunto();
 	string opcion;
 	while (opcion != "fin") {
-		string id;
+		string id;     // nombre de un idioma
 		if (opcion == "anadir/modificar") { 
 			cin >> id;
 			if (c.existe_idioma(id)) {
@@ -33,7 +33,7 @@ int main() {
 			}
 			else {
 				Idioma I;
-				I.crea_idioma(id);
+				I.crea_nuevo_idioma(id);
 				c.anadir_idioma(I);
 				cout << "Anadido " << id << endl << endl;
 			}

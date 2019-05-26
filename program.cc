@@ -1,16 +1,17 @@
+/** 
+	@mainpage Pr√°ctica de PRO2. Codificaci√≥n y decodificaci√≥n de textos. Documentaci√≥n. 
+	
+	Se ha construido un programa poniendo en pr√°ctica dise√±o modular, cuya funci√≥n es codificar y decodificar textos escritos usando diferentes idiomas.
+	
+	Este contiene un men√∫ con diferentes opciones y operaciones para tambi√©n obtener informaci√≥n de los diferentes idiomas y sus codificaciones.
+*/
+
 /** @file program.cc
 	@brief Programa principal
 */
 
-/** 
-	@mainpage CodificaciÛn y decodificaciÛn 
-	
-	Se ha construido un programa poniendo en pr·ctica diseÒo modular, cuya funciÛn es codificar y decodificar textos escritos usando diferentes idiomas.
-	
-	Este contiene un men˙ con diferentes opciones para tambiÈn obtener informaciÛn de los diferentes idiomas y sus codificaciones.
-*/
-
 #include "Cjto_idiomas.hh"
+#include "Idioma.hh"         // redundante pero necesario en el grafo de clases
 
 #ifndef NO_DIAGRAM
 #include <iostream>

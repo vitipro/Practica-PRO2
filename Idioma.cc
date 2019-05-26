@@ -51,7 +51,7 @@ void Idioma::leer_tabla_frec()
 
 void Idioma::modificar_tabla() 
 {
-	map<string, int> nueva_tabla;                                                            // nueva_tabla es la tabla que se introduce a la hora de añadir o modificar un idioma
+	map<string, int> nueva_tabla;                                                            
 	int n, f;     
 	string c;
 	cin >> n;

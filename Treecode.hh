@@ -1,5 +1,5 @@
 /** @file Treecode.hh
-    @brief EspecificaciÛn de la clase Treecode
+    @brief Especificaci√≥n de la clase Treecode
 */
 
 #ifndef _TREECODE_HH_
@@ -14,53 +14,58 @@ using namespace std;
 #include <string>
 #endif
 
+/*
+ * Clase Treecode
+ */
+
 /** @class Treecode
     @brief Representa un treecode de un idioma.
     
-	Se trata de un ·rbol binario codificado de pares <string, int>.
+	Se trata de un √°rbol binario codificado de pares <string, int>.
 */
 
 class Treecode {
 	
 private:
 
-	/** @brief ¡rbol binario */
+	/** @brief √Årbol binario */
 	BinTree<pair<string, int>> arbol;
-	/** @brief Diccionario para consultar cÛdigos
-
-		La llave representa el caracter a consultar, y el mapped value representa el cÛdigo
-	*/
-	map<string, string> diccionario;                   
 	
-	/** @brief Recorre en preorden un ·rbol binario.
+	/** @brief Diccionario para consultar c√≥digos
+
+		La llave representa el caracter a consultar, y el mapped value representa el c√≥digo
+	*/
+	map<string, string> diccionario;   
+
+	/** @brief Recorre en preorden un √°rbol binario.
 		\pre <em>cierto</em>
         \post Retorna el recorrido en preorden de T.
     */
-	void preorden(const BinTree<pair<string, int>>& T) const;
+	static void preorden(const BinTree<pair<string, int>>& T);
 	
-	/** @brief Recorre en inorden un ·rbol binario.
+	/** @brief Recorre en inorden un √°rbol binario.
 		\pre <em>cierto</em>
         \post Retorna el recorrido en inorden de T.
     */
-	void inorden(const BinTree<pair<string, int>>& T) const;
+	static void inorden(const BinTree<pair<string, int>>& T);
 	
-	/** @brief Inserta un ·rbol binario a una lista.
-        \pre l est· ordenada crecientemente por frecuencia de su raÌz y en caso de empate, por orden lexicogr·fico del caracter de la raÌz.
-        \post T queda insertado en su posiciÛn. 
+	/** @brief Inserta un √°rbol binario a una lista.
+        \pre L est√° ordenada crecientemente por frecuencia de su ra√≠z y en caso de empate, por orden lexicogr√°fico del caracter de la ra√≠z.
+        \post T queda insertado en su posici√≥n. 
     */
-    void anadir_elemento(list<BinTree<pair<string, int>>>& l, BinTree<pair<string, int>>& T);    // PROBAR TAMBI…N CON SETS!!!!!
+    static void anadir_elemento(list<BinTree<pair<string, int>>>& L, BinTree<pair<string, int>>& T);    
 	
-	/** @brief Codifica los caminos del ·rbol a.
+	/** @brief Codifica los caminos de un √°rbol T.
 		\pre <em>cierto</em>
-		\post El resultado es el ·rbol a codificado.
+		\post El resultado es el √°rbol T codificado.
 	*/
-	void codifica_arbol(const BinTree<pair<string, int>>& a, string c);
+	void codifica_arbol(const BinTree<pair<string, int>>& T, string c);
 	
-	/** @brief FunciÛn de inmersiÛn para decodificar un texto en un idioma.
+	/** @brief Funci√≥n de inmersi√≥n para decodificar un texto en un idioma.
         \pre 0 <= pos <= texto.length()
-        \post El resultado es la decodificaciÛn de texto si Èste se puede decodificar. De otra manera, se avisar· que no se puede y escribir· la ˙ltima posiciÛn decodificable. 
+        \post El resultado es la decodificaci√≥n de texto si √©ste se puede decodificar. De otra manera, se avisar√° que no se puede y escribir√° la √∫ltima posici√≥n decodificable. 
     */
-	void dec_inmersion(const BinTree<pair<string, int>>& a, string& texto, string& txt_dec, bool& decodificable, int& pos, int& ult_pos);
+	void dec_inmersion(const BinTree<pair<string, int>>& T, string& texto, string& txt_dec, bool& decodificable, int& pos, int& ult_pos);
     
 public:
 
@@ -68,7 +73,7 @@ public:
 	
 	/** @brief Creadora por defecto de un treecode.
         \pre <em>cierto</em> 
-        \post El resultado es un BinTree arbol y diccionario vacÌos.  
+        \post El resultado es un BinTree arbol y diccionario vac√≠os.  
     */
     Treecode();
 
@@ -76,41 +81,41 @@ public:
 	
 	// consultoras 
 	
-	/** @brief Consulta los cÛdigos del treecode de un idioma.
+	/** @brief Consulta los c√≥digos del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post El resultado es el conjunto de cÛdigos de diccionario del par·metro implÌcito. 
+        \post El resultado es el conjunto de c√≥digos de diccionario del par√°metro impl√≠cito. 
     */
 	void consultar_codigos() const;
 	
-	/** @brief Consulta el cÛdigo de un caracter del treecode de un idioma.
+	/** @brief Consulta el c√≥digo de un caracter del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post El resultado es el cÛdigo del caracter de una hoja, si existe. Si no, se avisar·. 
+        \post El resultado es el c√≥digo del caracter de una hoja, si existe. Si no, se avisar√°. 
     */
 	void consultar_codigo_especifico(string c) const;	
 
 	// entrada/salida
 	
 	/** @brief Codifica un texto en un idioma.
-        \pre En el canal de entrada est·ndard se encuentra un string texto a codificar.
-        \post Se escribe en el canal de salida est·ndard la codificaciÛn del texto en el idioma, si se puede.
+        \pre En el canal de entrada est√°ndard se encuentra un string texto a codificar.
+        \post Se escribe en el canal de salida est√°ndard la codificaci√≥n del texto en el idioma, si se puede.
     */
 	void codifica(string texto);
 	
 	/** @brief Decodifica un texto en un idioma.
-        \pre En el canal de entrada est·ndard se encuentra un string texto a decodificar.
-        \post Se escribe en el canal de salida est·ndard el texto decodificado, si se puede.
+        \pre En el canal de entrada est√°ndard se encuentra un string texto a decodificar.
+        \post Se escribe en el canal de salida est√°ndard el texto decodificado, si se puede.
     */
 	void decodifica(string texto);
 
-	/** @brief OperaciÛn de construcciÛn del treecode de un idioma.
-        \pre tabla est· ordenada ascendentemente por frecuencias.
-        \post arbol del par·metro implÌcito pasa a ser un ·rbol binario codificado que contiene los nodos <string, int> correspondientes.
+	/** @brief Operaci√≥n de construcci√≥n del treecode de un idioma.
+        \pre tabla est√° ordenada ascendentemente por frecuencias.
+        \post arbol del par√°metro impl√≠cito pasa a ser un √°rbol binario codificado que contiene los nodos <string, int> correspondientes.
     */
     void crear_treecode(map<string, int>& tabla); 
 
-	/** @brief OperaciÛn de escritura del treecode de un idioma.
+	/** @brief Operaci√≥n de escritura del treecode de un idioma.
         \pre <em>cierto</em> 
-        \post Se escriben en el canal de salida est·ndard los recorridos en pre e inordren de T.
+        \post Se escriben en el canal de salida est√°ndard los recorridos en pre e inordren de arbol del par√°metro impl√≠cito.
     */
     void escribir_treecode() const;  
 	
